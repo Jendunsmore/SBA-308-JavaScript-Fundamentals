@@ -5,22 +5,9 @@
 // each assignment = ID & value (% scored on assignment)
 // submission.score / points_possible
 // not yet due, don't include in avg or keyed dict. of scores
+//---------------------------------------------------------------------//
 
-// "id"
-// "avg"
-// <assignment_id>
-// points_possible
-// submission.score
-// course_id
-// group_weight
-// due_at
-// learner_id
-// submitted_at
-
-
-//--------------------------------------//
-// ------------ Provided Info-----------//
-
+// ------------ Provided Info-----------------------------------------//
 // The provided course information.
 const CourseInfo = {
     id: 451,
@@ -51,6 +38,12 @@ const AssignmentGroup = {
             name: "Code the World",
             due_at: "3156-11-15",
             points_possible: 500
+        },
+        {
+            id: 4,
+            name: "Code",
+            due_at: "2024-11-15",
+            points_possible: 100
         }
     ]
 };
@@ -67,10 +60,18 @@ const LearnerSubmissions = [
     },
     {
         learner_id: 125,
-        assignment_id: 2,
+        assignment_id: 1,
         submission: {
-            submitted_at: "2023-02-12",
-            score: 150
+            submitted_at: "2023-01-25",
+            score: 47
+        }
+    },
+    {
+        learner_id: 125,
+        assignment_id: 5,
+        submission: {
+            submitted_at: "2023-02-26",
+            score: 200
         }
     },
     {
@@ -94,7 +95,7 @@ const LearnerSubmissions = [
         assignment_id: 2,
         submission: {
             submitted_at: "2023-03-07",
-            score: 140
+            score: 0
         }
     }
 ];
@@ -122,8 +123,30 @@ function getLearnerData(course, ag, submissions) {
 const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
 
 console.log(result);
-
 //---------------------------------------------------------------------//
+
+//---------- Requirements --------------------------------------------//
+// Declare variables properly using let and const where appropriate.
+//Use operators to perform calculations on variables and literals.
+//Use strings, numbers, and Boolean values cached within variables.
+//Use at least two if/else statements to control program flow. Optionally, use at least
+//one switch statement.
+//Use try/catch statements to manage potential errors in the code, such as incorrectly
+//formatted or typed data being fed into your program.
+//Utilize at least two different types of loops.
+//Utilize at least one loop control keyword such as break or continue.
+//Create and/or manipulate arrays and objects.
+//Demonstrate the retrieval, manipulation, and removal of items in an array or
+//properties in an object.
+//Use functions to handle repeated tasks.
+//Program outputs processed data as described above. Partial credit will be earned
+//depending on the level of adherence to the described behavior.
+//Ensure that the program runs without errors (comment out things that do not work,
+//and explain your blockers - you can still receive partial credit).
+//Commit frequently to the git repository.
+//Include a README file that contains a description of your application.
+//--------------------------------------------------------------------//
+
 
 function getLearnerData(course, ag, submissions) {  //function, takes 3 parameters
     let result = [];  //result array
