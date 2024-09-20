@@ -125,43 +125,44 @@ console.log(result);
 
 //---------------------------------------------------------------------//
 
-function getLearnerData(course, ag, submissions) { //function, takes 3 parameters
-    let result = []; // result array
+function getLearnerData(course, ag, submissions) {  //function, takes 3 parameters
+    let result = [];  //result array
 
     try {
         if (course.id !== ag.course_id) { //checks course id equal to course_id belonging to assignmentGroup
             throw 'Input invalid'; // if not equal, error message is thrown
         }
 
-        function addOrUpdateLearner(learnerId, assignmentId, score) {
-            if (!result.some(el => el.id === learnerId)) {
-                let student = { id: learnerId };
-                student[assignmentId] = score;
-                result.push(student);
+        function addOrUpdateLearner(learnerId, assignmentId, score) { //function adds/updates learner info
+            if (!result.some(el => el.id === learnerId)) {  //check if learner is in result
+                let student = { id: learnerId };  //creates new learner object id
+                student[assignmentId] = score;  //assignment score & learner
+                result.push(student);  //new learner object added to result
             } else {
-                result.forEach((s) => {
+                result.forEach((s) => {  //update assignment score if learner exists
                     if (s.id === learnerId) {
-                        s[assignmentId] = score;
+                        s[assignmentId] = score;  //update existing learner with new score
                     }
                 });
             }
         }
 
-
-    for (let sub of submissions) { // loop through each submission | loop variable= sub
-        console.log(sub); // for each submission, log to console
+    for (let sub of submissions) {  //loop through each submission | loop variable= sub
+        console.log(sub);  //for each submission, log to console
 
         const hasSubmissionScore = sub.submission && sub.submission.score;
-        if (!hasSubmissionScore) {
-            continue;
+        if (!hasSubmissionScore) {  //check if submission has a score
+            continue;  //if no score found, go to next submission
         }
-        let score = sub.submission.score;
-        const dueDate = new Date(sub.due_at);
-        const submittedAt = new Date(sub.submission.submitted_at);
+        let score = sub.submission.score;  //submission score and late submissions
+        const dueDate = new Date(sub.due_at); //due date to Date object
+        const submittedAt = new Date(sub.submission.submitted_at); //submitted_at converts to date object
 
-        if (submittedAt > dueDate) {
-            score = score * 0.9;
+        if (submittedAt > dueDate) {  //deduct 10% from score for late work
+            score = score * 0.9; //? totals penalty for a late submission
         }
+
+        addOrUpdateLearner(sub.learner_id, sub.assignment_id, score);  //? update/ add learner data
     }
 } catch (err) {  //catch errors/ block
     console.error(err);
