@@ -143,36 +143,29 @@ function getLearnerData(course, ag, submissions) { //function, takes 3 parameter
                     if (s.id === learnerId) {
                         s[assignmentId] = score;
                     }
-                })
-            }
-            }
-        }
-
-
-
-        for (let sub of submissions) { // loop through each submission | loop variable= sub
-            console.log(sub); // for each submission, log to console
-
-            if (!hasSubmissionScore) {
-                
-            }
-
-            if (!result.some(el => el.id === sub.learner_id)) { //check if learner is already in result array
-                let student = { id: sub.learner_id }; // if NOT, create new object with learner's id
-                student[sub.assignment_id] + sub.submission.score; //student object| key: sub.assignment_id| value: sub.submission.score
-                result.push(student); // student object then added to result
-            } else {
-                result.forEach((s) => { // loops through result checking if current learner exists
-                    if (s.id === sub.learner_id) { // if so, assignment_id and score added to existing learner object
-                        s[sub.assignment_id] = sub.submission.score;
-                    }
                 });
             }
         }
-    } catch (err) {  //catch errors/ block
-        console.error(err);
+
+
+    for (let sub of submissions) { // loop through each submission | loop variable= sub
+        console.log(sub); // for each submission, log to console
+
+        const hasSubmissionScore = sub.submission && sub.submission.score;
+        if (!hasSubmissionScore) {
+            continue;
+        }
+        let score = sub.submission.score;
+        const dueDate = new Date(sub.due_at);
+        const submittedAt = new Date(sub.submission.submitted_at);
+
+        if (submittedAt > dueDate) {
+            score = score * 0.9;
+        }
     }
+} catch (err) {  //catch errors/ block
+    console.error(err);
+}
 
-    return result;
-
+return result;
 }
